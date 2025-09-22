@@ -128,6 +128,6 @@ app.post('/login', async(req, res) => {
     return res.status(400).json({"message": "Incorrect credentials."})
   }
 
-  return res.status(200).json({})
+  return res.status(200).json({"message": ""})
 })
 app.listen(process.env.PORT || port)
