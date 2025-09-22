@@ -7,9 +7,8 @@ const express = require('express'),
   path = require('path')
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
-const uri = 'mongodb+srv://iscruzrivera_db_user:Athena1068@webware.ifk3fxl.mongodb.net/?retryWrites=true&w=majority&appName=webware'
 
-const client = new MongoClient(uri, {
+const client = new MongoClient(process.env.MONGO_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
