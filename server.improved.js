@@ -28,7 +28,7 @@ async function initDB() {
     tasksCollection = db.collection('tasks')
     usersCollection = db.collection('users')
     console.log("Successfully connected.")
-  } catch {
+  } catch (err) {
     console.log("DB connection error: ", err)
   }
 }
