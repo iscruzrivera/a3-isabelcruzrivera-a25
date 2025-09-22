@@ -19,12 +19,14 @@ const client = new MongoClient(uri, {
 });
 
 let tasksCollection;
+let usersCollection;
 
 async function initDB() {
   try {
     await client.connect()
     const db = client.db('todo')
     tasksCollection = db.collection('tasks')
+    usersCollection = db.collection('users')
     console.log("Successfully connected.")
   } catch {
     console.log("DB connection error: ", err)
@@ -114,23 +116,18 @@ app.post('/modify', async (req, res) => {
 app.post('/login', async(req, res) => {
   const {username, password} = req.body
 
-  const user = await client.db('todo').collection('users').findOne({username})
+  let user = await client.db('todo').collection('users').findOne({username})
 
   if (!user) {
     await client.db('todo').collection('users').insertOne({username, password})
     user = {username, password}
-    alert("Acount created for this user.")
+    return res.status(200).json({"message": "Account successfully created and logged in."})
   }
 
   if (user.password !== password) {
-    return res.status(400).send('Invalid credentials.')
+    return res.status(400).json({"message": "Incorrect credentials."})
   }
 
-  await client.db('todo').collection('sessions').insertOne({
-    userId: user._id,
-    created: new Date()
-  })
-
-  return res.status(200).send('Successful login')
+  return res.status(200).json({})
 })
 app.listen(process.env.PORT || port)

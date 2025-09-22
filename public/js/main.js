@@ -51,10 +51,15 @@ const login = async function (event) {
     headers: { 'Content-Type': 'application/json' }
   })
 
-
+  const data = await response.json()
+  
   if (!response.ok) {
-    alert("Invalid username or password");
+    alert(data.message);
     return;
+  }
+  
+  if (data.message) {
+    alert(data.message)
   }
   
   localStorage.setItem("username", username)
