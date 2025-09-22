@@ -1,0 +1,17 @@
+{
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "start": "node server.improved.js"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.13",
+    "bootstrap": "^5.3.8",
+    "express": "^5.1.0",
+    "mime": "^2.6.0",
+    "mongodb": "^6.20.0",
+    "tailwindcss": "^4.1.13"
+  }
+}
