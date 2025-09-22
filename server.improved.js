@@ -5,10 +5,12 @@ const express = require('express'),
   port = 3000,
   app = express(),
   path = require('path')
+require('dotenv').config()
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 
-const client = new MongoClient(process.env.MONGO_URI, {
+const uri = process.env.MONGO_URI
+const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -113,7 +115,14 @@ app.post('/login', async(req, res) => {
   const {username, password} = req.body
 
   const user = await client.db('todo').collection('users').findOne({username})
-  if (!user || user.password !== password) {
+
+  if (!user) {
+    await client.db('todo').collection('users').insertOne({username, password})
+    user = {username, password}
+    alert("Acount created for this user.")
+  }
+
+  if (user.password !== password) {
     return res.status(400).send('Invalid credentials.')
   }
 
