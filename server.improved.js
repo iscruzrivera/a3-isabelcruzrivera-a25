@@ -3,6 +3,7 @@ const express = require('express'),
   mime = require('mime'),
   dir = 'public/',
   port = 3000,
+  railway_port = 8080,
   app = express(),
   path = require('path')
 require('dotenv').config()
@@ -130,4 +131,4 @@ app.post('/login', async(req, res) => {
 
   return res.status(200).json({"message": ""})
 })
-app.listen(process.env.PORT || port)
+app.listen(process.env.PORT || railway_port || port )

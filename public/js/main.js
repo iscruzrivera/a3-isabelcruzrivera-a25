@@ -18,6 +18,7 @@ const results = async function (event) {
     const del = row.insertCell(4)
     const delButton = document.createElement("button")
     delButton.innerText = "Delete"
+    delButton.classList.add('text-xl')
     const info = JSON.stringify({ id: obj._id, username })
 
     delButton.onclick = async () => {
@@ -34,6 +35,7 @@ const results = async function (event) {
     const modify = row.insertCell(5)
     const modifyButton = document.createElement("button")
     modifyButton.innerText = "Modify"
+    modifyButton.classList.add('text-xl')
 
     modifyButton.onclick = () => openModal(obj, i)
     modify.appendChild(modifyButton)
@@ -61,7 +63,7 @@ const login = async function (event) {
   if (data.message) {
     alert(data.message)
   }
-  
+
   localStorage.setItem("username", username)
 
   document.getElementById("login").style.display = "none"
@@ -119,6 +121,7 @@ const openModal = (obj, i) => {
     modal.style.display = "none"
   }
 }
+
 window.onload = function () {
   document.getElementById("login-button").onclick = login
   document.getElementById("task-button").onclick = submit
